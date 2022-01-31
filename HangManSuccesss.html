@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman</title>
+</head>
+<body>
+    <p>
+        <b>Author : Abrar Ahmed</b> <br>
+        <br>
+      <b>  Words Category : Important cities of Pakistan</b>
+      
+    </p>
+    <br>
+
+
+    <h > <strong id="lives"> Lives : 7  </strong></h>
+    <br>
+    <br>
+    <img src="0.jpg" width='300px' height="350px" id='img'>
+    <br>
+     
+
+    <script>
+
+
+
+        var words= ["Peshawar", "Lahore", "Islamabad", "Karachi", "Multan", "Quetta", 
+        "Faisalabad", "Rawalpindi", "Hyderabad", "Gujranwala", "Sialkot", "Kohat", "Swat"];
+        function getRandomWord(){
+            return ( words[Math.floor(Math.random() * words.length)] );
+          }
+      // var word=getRandomWord();
+      var word=getRandomWord().toLowerCase();
+      console.log(word);
+       
+       var choice="-";
+       var errors=0;
+       var arr=[];
+       var lives=7;
+
+       var remainingLetters=word.length;
+       for (var i =0 ;i<word.length;i++){
+           para="<h style='text-align:center;' id= 'h" + i + "'>";
+               document.write(para + "    ____     " + "</h>");
+             
+           arr[i]=" ____ ";
+            
+       }
+       //function to show the image of the hangman
+       function showImage(num){
+           document.images['img'].src=num+ ".jpg";
+       }
+
+
+       // function to check if the letter exits in the words
+       function checkLetter(char){
+            
+           for(var j =0 ; j<=word.length;j++){
+               
+    
+               if (char.toLowerCase() == word[j]){
+                  // console.log(char.toLowerCase() + '=' + word[j].toLowerCase());
+                   return true;
+               }
+               }
+               console.log('returns false');
+               return false;
+       }
+
+      
+       function writeCorrectLetter(char , i){
+           console.log(arr);
+        document.getElementById('h'+i).innerHTML=char;
+           //for(var i =0 ; i<arr.length;i++ ){
+               
+               //ans+=arr[i];
+              
+           //}
+         //  console.log("ans :" + ans);
+         //  console.log(arr + " =" + word);
+          // document.getElementById('text').innerHTML=ans;
+       }
+       console.log(word);
+
+       
+       function myfun(char,ele){
+          
+           for (var i =0 ; i<word.length;i++){
+                
+               if (char.toLowerCase() == word[i].toLowerCase()){
+              // document.getElementById('text').innerHTML=char;
+               ele.disabled=true;
+               arr[i]=char;
+
+               writeCorrectLetter(char , i);
+              // ans+=char;
+              
+              // console.log(ans);
+               // fucntion to check if the ans is equal to the word.
+              // if(ans.toLowerCase()==word){
+               //    alert("You won " );
+               //}
+             //  if (arr==word){
+                //   alert("You won ");
+               //}
+               remainingLetters-=1;
+               console.log(remainingLetters);
+               if(remainingLetters==0){
+                   document.getElementById('lives').innerHTML='You have won. Click restart to restart the game.';
+                   alert("You won!!!");
+               }
+               }
+          // ele.disabled=true;
+       // }
+    }
+     if (checkLetter(char)==false){
+         console.log('wrong char' + char);
+        errors=errors+1;
+        lives=lives-1;
+        document.getElementById('lives').innerHTML='lives:' + lives;
+        if(lives==0){
+            document.getElementById('lives').innerHTML='Game Over ! You lost. Click Restart to restart the game.';
+        }
+        showImage(errors);
+        console.log(errors);
+        ele.disabled=true;
+        if(errors==7){
+            alert("OOps you lost, the word was " + word);
+            
+            
+        }  
+     }
+
+       
+
+
+
+    
+    }
+
+    // function to restart the game
+
+    function restart(){
+        window.location.reload();
+    }
+    
+    
+    
+    </script>
+
+    <br>
+       
+<table style="border:1px solid black";>
+ <form>
+    <br>
+    <tr>
+   <td> <input type="button" value="A" onclick="myfun('A', this)" id="A"></td>
+   <td> <input type="button" value="B" onclick="myfun('B' ,this)" id="B"></td>
+   <td> <input type="button" value="C" onclick="myfun('C' , this)" id="C"></td>
+   <td><input type="button" value="D" onclick="myfun('D' , this)" id="D"></td> 
+  <td>  <input type="button" value="E" onclick="myfun('E' , this)" id="E"></td>
+   <td> <input type="button" value="F" onclick="myfun('F' , this)" id="F"></td>
+   <td> <input type="button" value="G" onclick="myfun('G' , this)" id="G"></td>
+   <td> <input type="button" value="H" onclick="myfun('H' , this)" id="H"></td>
+    <td><input type="button" value="I" onclick="myfun('I', this)" id="I"></td>
+    <td><input type="button" value="J" onclick="myfun('J' ,this)" id="J"></td>
+   <td> <input type="button" value="K" onclick="myfun('K' , this)" id="K"></td>
+  <td>  <input type="button" value="L" onclick="myfun('L' , this)" id="L"></td>
+   <td> <input type="button" value="M" onclick="myfun('M' , this)" id="M"></td>
+
+</tr>
+<tr>
+    <td><input type="button" value="N" onclick="myfun('N' , this)" id="N"></td>
+   <td><input type="button" value="O" onclick="myfun('O' , this)" id="O"></td> 
+  <td>  <input type="button" value="P" onclick="myfun('P' , this)" id="P"></td>
+   <td> <input type="button" value="Q" onclick="myfun('Q' , this)" id="Q"></td>
+    <td><input type="button" value="R" onclick="myfun('R' , this)" id="R"></td>
+    <td><input type="button" value="S" onclick="myfun('S' , this)" id="S"></td>
+    <td><input type="button" value="T" onclick="myfun('T' , this)" id="T"></td>
+   <td> <input type="button" value="U" onclick="myfun('U' , this)" id="U"></td>
+   <td> <input type="button" value="V" onclick="myfun('V', this)" id="V"></td>
+   <td> <input type="button" value="W" onclick="myfun('W' ,this)" id="W"></td>
+  <td>  <input type="button" value="X" onclick="myfun('X' , this)" id="X"></td>
+  <td>  <input type="button" value="Y" onclick="myfun('Y' , this)" id="Y"></td>
+   <td><input type="button" value="Z" onclick="myfun('Z' , this)" id="Z"></td> 
+</tr>
+</form>
+
+</table>
+<br>
+
+<button onclick='restart()'>Restart</button>
+</body>
+</html>
